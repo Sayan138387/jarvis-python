@@ -12,6 +12,7 @@ A voice-controlled personal assistant built using Python.
 - Open Gmail
 - Open LinkedIn
 - Tell Current Time
+- Live Weather Information using OpenWeatherMap API
 
 ## Technologies
 - Python
@@ -19,8 +20,6 @@ A voice-controlled personal assistant built using Python.
 - pyttsx3
 - webbrowser
 
-## Features
-- Live Weather Information using OpenWeatherMap API
 
 ## Author
 Sayan
