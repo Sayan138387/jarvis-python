@@ -3,6 +3,7 @@ import datetime
 import urllib.parse
 
 from weather import get_weather
+from fun import get_joke, get_quote, get_fact
 
 def execute_command(command):
 
@@ -56,5 +57,14 @@ def execute_command(command):
 
         else:
             return "Please tell me what to search."
+
+    elif "tell me a joke" in command:
+        return get_joke()
+
+    elif "tell me a quote" in command:
+        return get_quote()
+
+    elif "tell me a fact" in command:
+        return get_fact()
 
     return None
