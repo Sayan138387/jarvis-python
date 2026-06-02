@@ -1,5 +1,6 @@
 import webbrowser
 import datetime
+import urllib.parse
 
 def execute_command(command):
 
@@ -10,10 +11,6 @@ def execute_command(command):
     elif "open google" in command:
         webbrowser.open("https://google.com")
         return "Opening Google"
-
-    elif "what time is it" in command:
-        current_time = datetime.datetime.now().strftime("%I:%M %p")
-        return f"The time is {current_time}"
 
     elif "open github" in command:
         webbrowser.open("https://github.com")
@@ -30,5 +27,21 @@ def execute_command(command):
     elif "open linkedin" in command:
         webbrowser.open("https://linkedin.com")
         return "Opening LinkedIn"
+
+    elif "what time is it" in command:
+        current_time = datetime.datetime.now().strftime("%I:%M %p")
+        return f"The time is {current_time}"
+
+    elif "search" in command:
+
+        query = command.replace("search", "").strip()
+
+        if query:
+
+            url = "https://www.google.com/search?q=" + urllib.parse.quote(query)
+
+            webbrowser.open(url)
+
+            return f"Searching {query}"
 
     return None
