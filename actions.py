@@ -2,7 +2,11 @@ import webbrowser
 import datetime
 import urllib.parse
 
+from weather import get_weather
+
 def execute_command(command):
+
+    command = command.lower()
 
     if "open youtube" in command:
         webbrowser.open("https://youtube.com")
@@ -32,6 +36,12 @@ def execute_command(command):
         current_time = datetime.datetime.now().strftime("%I:%M %p")
         return f"The time is {current_time}"
 
+    elif "weather in" in command:
+
+        city = command.replace("weather in", "").strip()
+
+        return get_weather(city)
+
     elif "search" in command:
 
         query = command.replace("search", "").strip()
@@ -43,5 +53,8 @@ def execute_command(command):
             webbrowser.open(url)
 
             return f"Searching {query}"
+
+        else:
+            return "Please tell me what to search."
 
     return None
