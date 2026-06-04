@@ -5,13 +5,15 @@ import urllib.parse
 
 from weather import get_weather
 from fun import get_joke, get_quote, get_fact
-
+from notes import create_note
 
 def execute_command(command):
 
     command = command.lower()
 
+    # =========================
     # Websites
+    # =========================
 
     if "open youtube" in command:
         webbrowser.open("https://youtube.com")
@@ -37,7 +39,13 @@ def execute_command(command):
         webbrowser.open("https://linkedin.com")
         return "Opening LinkedIn"
 
+    elif "open spotify" in command or "play music" in command:
+        webbrowser.open("https://open.spotify.com")
+        return "Opening Spotify"
+
+    # =========================
     # Desktop Applications
+    # =========================
 
     elif "open notepad" in command:
         os.system("notepad")
@@ -55,41 +63,72 @@ def execute_command(command):
         os.system("code")
         return "Opening Visual Studio Code"
 
+    # =========================
+    # Folders
+    # =========================
+
+    elif "open downloads" in command:
+        return "Downloads folder support will be improved soon."
+
+    elif "open documents" in command:
+        return "Documents folder support will be improved soon."
+
+    # =========================
     # Time
+    # =========================
 
     elif "what time is it" in command:
         current_time = datetime.datetime.now().strftime("%I:%M %p")
         return f"The time is {current_time}"
 
+    # =========================
     # Weather
-
-    # elif "weather in" in command:
-    #     city = command.replace("weather in", "").strip()
-    #     return get_weather(city)
+    # =========================
 
     elif "weather in" in command:
 
         city = command.replace("weather in", "").strip()
 
-        print("City =", city)
-
         return get_weather(city)
 
+    # =========================
     # Google Search
+    # =========================
 
     elif "search" in command:
 
         query = command.replace("search", "").strip()
 
         if query:
-            url = "https://www.google.com/search?q=" + urllib.parse.quote(query)
+
+            url = (
+                "https://www.google.com/search?q="
+                + urllib.parse.quote(query)
+            )
+
             webbrowser.open(url)
+
             return f"Searching {query}"
 
         else:
             return "Please tell me what to search."
 
-    # Fun Features
+    # =========================
+    # Notes
+    # =========================
+
+    elif command.startswith("note"):
+
+        note_text = command.replace("note", "").strip()
+
+        if note_text:
+            return create_note(note_text)
+
+        return "Please tell me what to write."
+
+    # =========================
+    # Fun Commands
+    # =========================
 
     elif "tell me a joke" in command or "joke" in command:
         return get_joke()
