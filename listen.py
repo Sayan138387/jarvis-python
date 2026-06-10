@@ -1,5 +1,6 @@
 import speech_recognition as sr
 
+
 def take_command():
 
     recognizer = sr.Recognizer()
@@ -8,9 +9,24 @@ def take_command():
 
         print("Listening...")
 
-        recognizer.adjust_for_ambient_noise(source)
+        recognizer.adjust_for_ambient_noise(
+            source,
+            duration=1
+        )
 
-        audio = recognizer.listen(source)
+        try:
+
+            audio = recognizer.listen(
+                source,
+                timeout=5,
+                phrase_time_limit=5
+            )
+
+        except sr.WaitTimeoutError:
+
+            print("Listening timed out.")
+
+            return ""
 
     try:
 
